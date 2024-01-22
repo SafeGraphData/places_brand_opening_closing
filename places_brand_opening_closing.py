@@ -59,5 +59,5 @@ chart = chart.properties(
     )
 )
 
-st.altair_chart(chart)
+st.altair_chart(chart, use_container_width=True)
 
