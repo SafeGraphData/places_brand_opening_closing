@@ -35,14 +35,14 @@ brands_open_close_df = brands_open_close_df[
 
 # st.dataframe(brands_open_close_df)
 
-chart = alt.Chart(brands_open_close_df).mark_circle(size=40, color='blue', stroke='black').encode(
+chart = alt.Chart(brands_open_close_df).mark_circle(size=40, color='white', stroke='blue').encode(
     x=alt.X('Release month', title='Release month'),
     y=alt.Y('Brands with at least 1 new opened POI', title='Brands with at least 1 opening or closing of a POI'),
     color=alt.value('blue'),
     tooltip=[alt.Tooltip('Release month'),
              alt.Tooltip('Brands with at least 1 new opened POI', title='>1 Opened POI', format=',')
     ]
-) + alt.Chart(brands_open_close_df).mark_circle(size=40, color='red', stroke='black').encode(
+) + alt.Chart(brands_open_close_df).mark_circle(size=40, color='white', stroke='red').encode(
     x=alt.X('Release month'),
     y=alt.Y('Brands with at least 1 new closed POI'),
     color=alt.value('red'),
