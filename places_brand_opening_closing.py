@@ -33,20 +33,23 @@ brands_open_close_df = brands_open_close_df[
     (brands_open_close_df["Country"] == "Grand Total")
 ]
 
+brands_open_close_df["Release month"] = pd.to_datetime(brands_open_close_df["Release month"])+ pd.DateOffset(1)
+brands_open_close_df["Release month"] = brands_open_close_df["Release month"].dt.strftime('%Y-%m-%dT%H:%M:%SZ')
+
 # st.dataframe(brands_open_close_df)
 
 chart = alt.Chart(brands_open_close_df).mark_circle(size=50, fill='white', stroke='blue').encode(
-    x=alt.X('Release month', title='Release month'),
+    x=alt.X('Release month', title='Release month',  timeUnit='yearmonth'),
     y=alt.Y('Brands with at least 1 new opened POI', title='Brands with at least 1 opening or closing of a POI'),
     color=alt.value('blue'),
-    tooltip=[alt.Tooltip('Release month'),
+    tooltip=[alt.Tooltip('Release month', timeUnit='yearmonth',title='Release month'),
              alt.Tooltip('Brands with at least 1 new opened POI', title='>1 Opened POI', format=',')
     ]
 ) + alt.Chart(brands_open_close_df).mark_circle(size=50, fill='white', stroke='red').encode(
-    x=alt.X('Release month'),
+    x=alt.X('Release month', title='Release month',  timeUnit='yearmonth'),
     y=alt.Y('Brands with at least 1 new closed POI'),
     color=alt.value('red'),
-    tooltip=[alt.Tooltip('Release month'),
+    tooltip=[alt.Tooltip('Release month',  timeUnit='yearmonth',title='Release month'),
              alt.Tooltip('Brands with at least 1 new closed POI', title='>1 Closed POI', format=',')]
 )
 
